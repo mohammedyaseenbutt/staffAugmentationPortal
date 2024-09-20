@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Rock+Salt|Shadows+Into+Light|Cedarville+Cursive');
+
+.editor {
+  border: 1px solid black;
+  border-radius: 4px;
+  max-height: 40vh;
+  overflow: auto;
+}
+
+.editor:active {
+  border: none;
+  outline: none !important;
+}
+
+.text-editor {
+  padding: 25px;
+  min-height: 400px;
+}
+
+.text-editor:focus {
+  outline: none;
+}
+
+.toolbar {
+  display: flex;
+}
+
+.toolbar button {
+  font-size: calc(0em + 0.9vw) !important;
+  color: #555;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.toolbar button:hover {
+  color: #333;
+}
+
+.toolbar button i {
+  font-style: normal;
+}
+
+.date-inputs {
+  font-size: calc(0em + 0.9vw) !important;
+}
+
+.logo-size-nda {
+  height: 60px !important;
+}
+
+.italic-signature {
+  border-radius: 0px !important;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid black !important;
+  font-family: 'Cedarville Cursive', cursive;
+  font-style: italic;
+  padding: none;
+}
+
+.job-title-input {
+  border-radius: 0px !important;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid black;
+  padding: none;
+}
+
+.custom-margin-p {
+  margin-top: revert !important;
+  margin-bottom: 0px;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  border: 0px solid white;
+}
+
+.time-li {
+  display: inline-block;
+  font-size: 1em;
+  list-style-type: none;
+  padding: 1em;
+  text-transform: uppercase;
+  background-color: #3198DD;
+  color: white;
+  border-radius: 20px;
+  margin: 10px;
+  text-align: center;
+  width: 130px;
+}
+
+.time-li span {
+  display: block;
+  font-size: 2.5rem;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji {
+  padding: 1rem;
+}
+
+.emoji span {
+  font-size: 4rem;
+  padding: 0 .5rem;
+}

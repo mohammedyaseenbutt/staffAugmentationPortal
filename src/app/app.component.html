@@ -1,0 +1,77 @@
+<section class="container-fluid nav-padding overflow-x-hidden" id="signUpComponent">
+  <div class="row signup-screen">
+    <!-- Left Side Content -->
+    <div class="col-4 signup-text">
+      <div class="custom-div-padding">
+        <h3>Get Your FREE</h3>
+        <h3>30-Days Trial Now!</h3>
+
+        <!-- <p class="mt-4 grey-custom-font">Experience why over 2 million customers choose Rhombus tools</p> -->
+        <p class="mt-4 grey-custom-font">Experience why over 2 million customers
+          <span #typingText typing-speed="70" typing-delay="1000" words="choose Rhombus tools! ,love our tool! ,depend on our tool! "></span>
+        </p>
+
+        <div class="d-flex flex-row mt-4">
+          <div class="w-auto me-2">
+            <i class="bi bi-currency-dollar"></i>
+          </div>
+          <div class="w-auto">
+            Absolutely Free
+          </div>
+        </div>
+        <p class="grey-custom-font ms-4">No hidden charges, No credit card required</p>
+
+        <div class="d-flex flex-row mt-2">
+          <div class="w-auto me-2">
+            <i class="bi bi-lightning-fill"></i>
+          </div>
+          <div class="w-auto">
+            Fast & Easy
+          </div>
+        </div>
+        <p class="grey-custom-font ms-4">Get access instantly, no downloads required</p>
+
+        <div class="d-flex flex-row">
+          <div class="w-auto me-2">
+            <i class="bi bi-person-badge"></i>
+          </div>
+          <div class="w-auto">
+            Your Own Data
+          </div>
+        </div>
+        <p class="grey-custom-font ms-4">Enjoy the Free Trial with your company data</p>
+
+        <div class="d-flex flex-row">
+          <div class="w-auto me-2">
+            <i class="bi bi-database-fill-up"></i>
+          </div>
+          <div class="w-auto">
+            Unlimited Data
+          </div>
+        </div>
+        <p class="grey-custom-font ms-4">Access all features of the worlds #1 business software!</p>
+
+        <p class="mt-4 mb-0 pb-0">Do you prefer talking to a representative?</p>
+        <p>Call us at <span class="call-text">+1 610-450-4848</span></p>
+      </div>
+    </div>
+    <!-- Left Side Content Ends -->
+
+    <!-- Sign Up -->
+    <div class="col-6 d-flex justify-content-center align-items-center">
+      <amplify-authenticator [formFields]="formFields" [socialProviders]="['facebook', 'google']">
+        <ng-template amplifySlot="authenticated" let-user="user" let-signOut="signOut">
+        </ng-template>
+      </amplify-authenticator>
+    </div>
+    <!-- Sign Up Ends -->
+  </div>
+</section>
+<section id="secondDashboardComponent">
+  <amplify-authenticator>
+    <ng-template amplifySlot="authenticated" let-user="user" let-signOut="signOut">
+      <router-outlet class="max-h-w">
+      </router-outlet>
+    </ng-template>
+  </amplify-authenticator>
+</section>

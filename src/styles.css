@@ -1,0 +1,1222 @@
+/* Importing Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
+/* Style CSS Starts */
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* App Component Starts */
+.amplify-tabs-item[data-state=active] {
+  color: #F37440 !important;
+  border-color: #F37440 !important;
+}
+
+[data-amplify-authenticator] [data-state=inactive] {
+  color: grey;
+  background-color: #F9F9F9;
+}
+
+[data-amplify-authenticator] [data-amplify-router] {
+  border-style: hidden !important;
+}
+
+.amplify-input {
+  padding: 14px !important;
+  border: 1px solid #DCDCDC !important;
+}
+
+.amplify-button--primary {
+  background-color: #002E3C !important;
+  color: white !important;
+  border-radius: 6px !important;
+  padding: 13px !important;
+}
+
+.amplify-button--primary:hover {
+  background-color: #F37440 !important;
+  border-color: #F37440 !important;
+  color: white !important;
+}
+
+.amplify-field-group__outer-start .amplify-field-group__control {
+  padding: 14px !important;
+  border: 1px solid #DCDCDC !important;
+}
+/* App Component Ends */
+
+/* Top Nav CSS Starts */
+.nav-padding {
+  padding-left: 5% !important;
+  padding-right: 5% !important;
+}
+
+.navbar {
+  background: #002E3C !important;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.nav-item {
+  width: 15%;
+  text-align: center;
+  font-weight: 300;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.nav-item:hover {
+  animation: moveUp 0.5s;
+}
+
+.input-group-text {
+  background-color: white !important;
+  border: none !important;
+  color: black !important;
+}
+
+.top-nav-search {
+  background-color: white !important;
+  border: none !important;
+  color: black !important;
+}
+
+.navbar-toggler {
+  background-color: white !important;
+}
+
+.notification-bell {
+  background: none !important;
+  border: none !important;
+}
+
+.bi-bell {
+  font-size: 25px !important;
+}
+
+.logo-size {
+  height: 65px;
+}
+
+.custom-margin {
+  margin-right: 7rem !important;
+}
+
+.navbar-nav li .active {
+  color: #F37440 !important;
+}
+
+.navbar-nav li a:hover {
+  color: #F37440 !important;
+}
+
+.user-icon-btn {
+  background: #F1F1F1 !important;
+  color: #858585 !important;
+  height: 33px !important;
+  width: 33px !important;
+  display: flex !important;
+  text-align: center !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border: none !important;
+}
+
+.loggedin-user {
+  height: 33px !important;
+  width: 33px !important;
+  border: none !important;
+}
+
+.grow:hover {
+  transform: scale(1.2);
+  transition: all .6s ease-in-out;
+}
+
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: -90px !important;
+  cursor: pointer;
+}
+.dropdown-item.active, .dropdown-item:active {
+  color: black !important;
+  text-decoration: none;
+  background-color: #e8eeee !important;
+}
+
+/* Top Nav CSS Ends */
+
+/* Dashboard CSS Starts */
+.dashboard-card-overflow {
+  max-height: 80vh;
+  /* overflow: auto; */
+}
+
+.heading-section {
+  background-color: #002E3C;
+}
+
+.h1-heading {
+  color: white;
+  font-weight: 300;
+  font-size: x-large;
+}
+
+.h6-heading {
+  color: white;
+  font-weight: 200;
+  font-size: large;
+  opacity: 0.57;
+}
+
+.h5-heading {
+  color: white;
+  font-weight: 400;
+  font-size: medium;
+}
+
+.btn-close-white {
+  color: white !important;
+  transition: all 0.5s ease !important;
+}
+
+.btn-close {
+  transition: all 0.5s ease !important;
+}
+
+.btn-close-white:hover,
+.btn-close:hover {
+  rotate: -90deg !important
+}
+
+.browser-btn {
+  background-color: #012E3C !important;
+  color: white !important;
+  border-radius: 7px !important;
+}
+
+.browser-btn:hover {
+  background-color: #015c78 !important;
+  color: white !important;
+  border-radius: 7px !important;
+}
+
+.second-menu a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.377);
+}
+
+.second-menu a:hover {
+  border-bottom: 2px solid white;
+}
+
+.second-menu a.active {
+  border-bottom: 2px solid white;
+}
+
+.pb-7 {
+  padding-bottom: 7rem !important;
+}
+
+.btn-primary {
+  background-color: #002E3C !important;
+  color: white !important;
+  border-radius: 20px !important;
+}
+
+.btn-primary:hover {
+  background-color: #F37440 !important;
+  border-color: #F37440 !important;
+  color: white !important;
+  border-radius: 20px !important;
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn .btn-text {
+  transition: all 0.3s ease !important;
+  /* Apply smooth transition to the opacity property */
+}
+
+.btn i.bi-plus-circle {
+  position: absolute;
+  left: -100%;
+  transition: all 0.3s ease !important;
+  /* Apply smooth transition to the transform property */
+}
+
+.btn:hover .btn-text {
+  opacity: 0;
+  /* Fade out the text when hovering */
+}
+
+.btn:hover i.bi-plus-circle {
+  left: 10px;
+  /* Move the icon to the visible position */
+  transition: all 0.3s linear !important;
+}
+
+.btn-width {
+  width: 14vw;
+}
+
+.mt-custom {
+  margin-top: -9rem !important;
+}
+
+.table thead th {
+  background-color: #F8F8FA !important;
+  border-bottom: 0px transparent !important;
+  color: #69838C !important;
+}
+
+.table thead th:first-child {
+  background-color: #F8F8FA !important;
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+}
+
+.table thead th:last-child {
+  background-color: #F8F8FA !important;
+  text-align: center;
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  width: 190px;
+}
+
+tbody {
+  border-bottom: 0px transparent !important;
+}
+
+tbody tr td:last-child {
+  border-bottom: 0px transparent !important;
+  text-align: center;
+}
+
+.edit-button {
+  background-color: white !important;
+  border: 1px solid #002E3C !important;
+  border-radius: 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+.edit-button:hover {
+  background-color: #002E3C !important;
+  border: 1px solid #002E3C !important;
+}
+
+.edit-button:hover .action-text {
+  display: inline !important;
+  color: white;
+  margin-left: 10px;
+  transition: all 0.2s ease !important;
+}
+
+.save-button {
+  background-color: white !important;
+  border: 1px solid #002E3C !important;
+  border-radius: 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+.save-button:hover {
+  background-color: #198754 !important;
+  border: 1px solid #198754 !important;
+}
+
+.save-button:hover .action-text {
+  display: inline !important;
+  color: white;
+  margin-left: 10px;
+  transition: all 0.2s ease !important;
+}
+
+.action-text,
+.delete-text,
+.view-text {
+  display: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.edit-button:hover .bi-pencil {
+  color: white !important;
+  transition: all 0.2s ease !important;
+}
+
+.save-button:hover .bi-check-lg {
+  color: white !important;
+  transition: all 0.2s ease !important;
+}
+
+.delete-button {
+  background-color: white !important;
+  border: 1px solid #002E3C !important;
+  border-radius: 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+.delete-button:hover {
+  background-color: #C51615 !important;
+  border: 1px solid #C51615 !important;
+}
+
+.delete-button:hover .delete-text {
+  display: inline !important;
+  color: white;
+  margin-left: 10px;
+  transition: all 0.2s ease !important;
+}
+
+.delete-button:hover .bi-trash3-fill {
+  color: white !important;
+  transition: all 0.2s ease !important;
+}
+
+.view-button {
+  background-color: white !important;
+  border: 1px solid #002E3C !important;
+  border-radius: 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+.view-button:hover {
+  background-color: #61B7F0 !important;
+  border: 1px solid #61B7F0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.view-button:hover .view-text {
+  display: inline !important;
+  color: white;
+  margin-left: 10px;
+  transition: all 0.2s ease !important;
+}
+
+.view-button:hover .bi-eye {
+  color: white !important;
+  transition: all 0.2s ease !important;
+}
+
+.payment-badge {
+  border-radius: 5px !important;
+  background-color: #E8F4FD !important;
+  color: #62B7F0 !important;
+  font-size: medium !important;
+  font-weight: 400 !important;
+}
+
+.new-service-modal-header {
+  padding-bottom: 0px !important;
+  border-bottom: none !important;
+}
+
+.new-service-modal-footer {
+  padding-top: 0px !important;
+  border-top: none !important;
+}
+
+.cancel-btn {
+  background-color: #EEEEEE !important;
+  border-color: #EEEEEE !important;
+  border-radius: 5px !important;
+  color: black !important;
+}
+
+.cancel-btn:hover {
+  background-color: #dfdfdf !important;
+  border-color: #dfdfdf !important;
+  border-radius: 5px !important;
+  color: black !important;
+}
+
+.base-package-row {
+  border-radius: 5px !important;
+  background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 4px, transparent 4px) 0% 0%/5px 5px no-repeat,
+    radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 4px, transparent 4px) 100% 0%/5px 5px no-repeat,
+    radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 4px, transparent 4px) 0% 100%/5px 5px no-repeat,
+    radial-gradient(circle at 0 0, #ffffff 0, #ffffff 4px, transparent 4px) 100% 100%/5px 5px no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 2px) calc(100% - 10px) no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 10px) calc(100% - 2px) no-repeat,
+    linear-gradient(251deg, #ff58aa 10%, #ff976c 40%);
+}
+
+.business-package-row {
+  border-radius: 5px !important;
+  background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 4px, transparent 4px) 0% 0%/5px 5px no-repeat,
+    radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 4px, transparent 4px) 100% 0%/5px 5px no-repeat,
+    radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 4px, transparent 4px) 0% 100%/5px 5px no-repeat,
+    radial-gradient(circle at 0 0, #ffffff 0, #ffffff 4px, transparent 4px) 100% 100%/5px 5px no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 2px) calc(100% - 10px) no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 10px) calc(100% - 2px) no-repeat,
+    linear-gradient(251deg, #d146ff 10%, #7185fb 40%, #31AFF8 100%);
+}
+
+.enterprise-package-row {
+  border-radius: 5px !important;
+  background: radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 4px, transparent 4px) 0% 0%/5px 5px no-repeat,
+    radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 4px, transparent 4px) 100% 0%/5px 5px no-repeat,
+    radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 4px, transparent 4px) 0% 100%/5px 5px no-repeat,
+    radial-gradient(circle at 0 0, #ffffff 0, #ffffff 4px, transparent 4px) 100% 100%/5px 5px no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 2px) calc(100% - 10px) no-repeat,
+    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 10px) calc(100% - 2px) no-repeat,
+    linear-gradient(251deg, #EBBF43 10%, #16bf64 40%);
+}
+
+.basic-border-left {
+  border-left: 1px solid #FF976C;
+  color: #FF976C !important;
+}
+
+.base-label {
+  color: #FF976C !important;
+}
+
+.business-border-left {
+  border-left: 1px solid #31AFF8;
+  color: #31AFF8 !important;
+}
+
+.business-label {
+  color: #31AFF8 !important;
+}
+
+.enterprise-border-left {
+  border-left: 1px solid #16BF64;
+  color: #16BF64 !important;
+}
+
+.enterprise-label {
+  color: #16BF64 !important;
+}
+
+.w-35 {
+  width: 35% !important;
+}
+
+.w-65 {
+  width: 65% !important;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes floatLeftToRight {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes floatRightToLeft {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.float-right {
+  animation: floatRightToLeft 0.5s ease-in-out 1 forwards;
+}
+
+.float-left {
+  animation: floatLeftToRight 0.5s ease-in-out 1 forwards;
+}
+
+.float-card {
+  animation: floatUp 0.5s ease-in-out 1 forwards;
+}
+
+.form-width {
+  width: 70% !important;
+  border: 1px solid black !important;
+}
+
+button:focus,
+select:focus,
+input:focus,
+textarea:focus {
+  box-shadow: none !important;
+}
+
+.edit-card {
+  border: none !important;
+  background-color: #FBFBFB !important;
+}
+
+.edit-card-body {
+  background-color: #FBFBFB !important;
+}
+
+.custom-border-radius {
+  border-radius: 10px !important;
+  background-color: #FBFBFB !important;
+}
+
+.gif-width {
+  max-width: 170px;
+  cursor: pointer;
+}
+
+.dash-list {
+  list-style-type: none;
+}
+
+.dash-list li::before {
+  content: '- ';
+  color: #F37440;
+  margin-left: -1rem;
+}
+
+.btn-download {
+  background-color: #2CA97F !important;
+  border: none !important;
+  border-radius: 6px !important;
+}
+
+.btn-download:hover {
+  background-color: #3bce9d !important;
+  border: none !important;
+  border-radius: 6px !important;
+}
+
+.custom-font-color {
+  color: #012E3C !important;
+  opacity: 0.4 !important;
+}
+
+.payment-card-body {
+  border: 1px solid #012E3C !important;
+  border-radius: 6px !important;
+}
+
+.payment-card {
+  transition: all 0.2s ease !important;
+}
+
+.payment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.credit-card-modal-header {
+  background-color: #012E3C !important;
+  color: white !important;
+}
+
+.icon-image {
+  height: 30px !important;
+  font-size: medium;
+}
+
+.credit-card-text {
+  color: #b0b0b0 !important;
+  font-size: small;
+}
+
+.payment-form-control-padding {
+  padding: 10px !important;
+}
+
+.payment-form-control-border {
+  border: 0.5px solid #4C2454 !important;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #F5F5F5 !important;
+  border: none !important;
+}
+
+.payment-form-check-input:checked {
+  background-color: black !important;
+  border: black !important;
+}
+
+.btn-submit-form {
+  background-color: #2CA97F !important;
+  border: #2CA97F !important;
+}
+
+.btn-clear-form {
+  background-color: #E6E6E6 !important;
+  border: #E6E6E6 !important;
+  color: black !important;
+  border-radius: 20px !important;
+}
+
+.btn-clear-form:hover {
+  background-color: #dfdfdf !important;
+  border-color: #dfdfdf !important;
+  color: black !important;
+}
+
+.modal-content-radius {
+  border-radius: 10px !important;
+}
+
+.checque-payment-hr {
+  background-color: transparent !important;
+  border: 0.5px dashed black !important;
+}
+
+.checque-modal-h6 {
+  opacity: 0.6 !important;
+  color: #1B1B1B !important;
+  font-size: medium !important;
+  font-weight: normal !important;
+}
+
+.checque-modal-p {
+  color: #1B1B1B !important;
+}
+
+ngx-dropzone {
+  background-color: #F3F6FD !important;
+  color: black;
+}
+
+.service-text {
+  color: #012E3C;
+  opacity: 0.58;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.service-description-text {
+  color: #012E3C;
+  font-size: 15px;
+}
+
+.service-status-text {
+  color: #3198DD;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.service-plan-card {
+  border: none !important;
+  box-shadow: 0px 1px 10px #00000017 !important;
+  transition: all 0.2s ease !important;
+  border-radius: 12px !important;
+}
+
+.service-plan-card-active {
+  border: 1px solid #012E3C !important;
+  transition: all 0.2s ease !important;
+}
+
+.service-plan-card:hover {
+  transition: all 0.2s ease !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06) !important;
+}
+
+.col-background {
+  background-color: #F8F8FA !important;
+  padding-top: 10px;
+  border-radius: 10px;
+}
+
+/* Macbook Responsive CSS */
+@media only screen and (max-width: 1440px) {
+  .delete-button {
+    font-size: 0.8vw !important;
+  }
+
+  .edit-button {
+    font-size: 0.8vw !important;
+  }
+
+  .view-button {
+    font-size: 0.8vw !important;
+  }
+
+  .payment-badge {
+    font-size: 0.95vw !important;
+  }
+
+  table {
+    font-size: 0.95vw !important;
+  }
+
+  .form-width {
+    font-size: 0.95vw !important;
+  }
+
+  .service-text-header,
+  .service-text-p {
+    font-size: 0.95vw !important;
+  }
+}
+
+/* Macbook Responsive CSS Ends */
+
+.circularLoaderList {
+  height: 50px;
+  width: 50px;
+  margin-top: 20% !important;
+  margin-bottom: 20% !important;
+  opacity: 1;
+  background-color: transparent;
+  border: 5px solid #E8F4FD;
+  border-top: 5px solid #F37440;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.header-display-info {
+  background-color: #F8F8FA;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.col-border-right {
+  border-right: 1px solid #cacaca;
+}
+
+.service-text-header {
+  color: #69838C !important;
+  font-weight: 600;
+}
+
+.service-text-p {
+  color: #000;
+}
+
+.display-inline-text {
+  display: inline;
+}
+
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.form-width-input {
+  width: 40% !important;
+  display: inline !important;
+}
+
+.scrollable-row {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.nav-link-custom.active {
+  background-color: #fbfbfb !important;
+  border: none !important;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  border: none !important;
+}
+
+.nav-tabs {
+  border: none !important;
+}
+
+.tab-content>.tab-pane {
+  border-radius: 0.375rem;
+}
+/* Dashboard CSS Ends */
+
+/* Signup CSS Starts */
+.overflow-hidden {
+  overflow-x: hidden !important;
+}
+
+.signup-screen {
+  height: 100vh;
+  width: 100vw;
+}
+
+.signup-text {
+  background-color: #F9F9F9;
+}
+
+.custom-div-padding {
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 15vh;
+}
+
+.grey-custom-font,
+.label-custom {
+  color: #5A5A5A;
+}
+
+.call-text {
+  color: #F37440;
+}
+
+.trial-button {
+  width: 100%;
+  border-radius: 6px !important;
+  padding: 13px !important;
+}
+
+.trial-button:hover {
+  width: 100%;
+  border-radius: 6px !important;
+}
+
+.signup-form-control {
+  padding: 14px !important;
+  border: 1px solid #DCDCDC !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border: 1px solid #DCDCDC !important;
+}
+
+.signup-form-control-password {
+  padding: 14px !important;
+  border-top: 1px solid #DCDCDC !important;
+  border-left: 1px solid #DCDCDC !important;
+  border-bottom: 1px solid #DCDCDC !important;
+  border-right: none !important;
+}
+
+.password-button {
+  border-top: 1px solid #DCDCDC !important;
+  border-right: 1px solid #DCDCDC !important;
+  border-bottom: 1px solid #DCDCDC !important;
+  border-left: none !important;
+}
+
+/* Signup CSS Ends */
+
+/*----------------genealogy-scroll----------*/
+.genealogy-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+
+.genealogy-scroll::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #e4e4e4;
+}
+
+.genealogy-scroll::-webkit-scrollbar-thumb {
+  background: #212121;
+  border-radius: 10px;
+  transition: all 0.5s ease !important;
+}
+
+.genealogy-scroll::-webkit-scrollbar-thumb:hover {
+  background: #d5b14c;
+}
+
+/*----------------genealogy-tree----------*/
+.genealogy-body {
+  white-space: nowrap;
+  overflow: auto;
+}
+
+.genealogy-tree {
+  display: inline-block;
+}
+
+.genealogy-tree ul {
+  padding-top: 20px;
+  position: relative;
+  padding-left: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.genealogy-tree li {
+  float: left;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 5px 0 5px;
+}
+
+.genealogy-tree li::before,
+.genealogy-tree li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 2px solid #ccc;
+  width: 50%;
+  height: 18px;
+}
+
+.genealogy-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 2px solid #ccc;
+}
+
+.genealogy-tree li:only-child::after,
+.genealogy-tree li:only-child::before {
+  display: none;
+}
+
+.genealogy-tree li:only-child {
+  padding-top: 0;
+}
+
+.genealogy-tree li:first-child::before,
+.genealogy-tree li:last-child::after {
+  border: 0 none;
+}
+
+.genealogy-tree li:last-child::before {
+  border-right: 2px solid #ccc;
+  border-radius: 0 5px 0 0;
+  -webkit-border-radius: 0 5px 0 0;
+  -moz-border-radius: 0 5px 0 0;
+}
+
+.genealogy-tree li:first-child::after {
+  border-radius: 5px 0 0 0;
+  -webkit-border-radius: 5px 0 0 0;
+  -moz-border-radius: 5px 0 0 0;
+}
+
+.genealogy-tree ul ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 2px solid #ccc;
+  width: 0;
+  height: 20px;
+}
+
+.genealogy-tree li a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.genealogy-tree li a:hover+ul li::after,
+.genealogy-tree li a:hover+ul li::before,
+.genealogy-tree li a:hover+ul::before,
+.genealogy-tree li a:hover+ul ul::before {
+  border-color: #F37440;
+}
+
+/*--------------memeber-card-design----------*/
+.member-view-box {
+  /* padding: 0px 60px; */
+  padding: 0px 0px;
+  text-align: center;
+  position: relative;
+}
+
+.member-image img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.member-name {
+  font-size: large !important;
+  margin-bottom: 0px !important;
+  color: black !important;
+  font-weight: 400 !important;
+}
+
+.member-title {
+  font-size: small !important;
+  color: rgb(151, 151, 151) !important;
+}
+
+/* Profile Picture Section */
+.card-header-profile {
+  background: url(https://rvs-profile-card-component-main.netlify.app/images/bg-pattern-card.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100px;
+}
+
+.container-profile {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: -65px;
+}
+
+.avatar-upload {
+  position: relative;
+}
+
+.avatar-upload .avatar-edit {
+  position: absolute;
+  z-index: 1;
+  top: -16px;
+}
+
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+
+.avatar-upload .avatar-edit input+label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+
+.avatar-upload .avatar-edit input+label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+
+.avatar-upload .avatar-edit input+label:after {
+  content: "\f030";
+  font-family: 'FontAwesome';
+  color: #757575;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+
+.avatar-upload .avatar-preview {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #F8F8F8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-upload .avatar-preview>div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#launchModal {
+  display: none !important;
+}
+
+#imagePreview {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: xxx-large;
+  color: #858585 !important;
+}
+/* Profile Picture Section Ends */
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+/* Swal Alerts */
+.colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+  background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+  background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+  background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+  color: white;
+}
+
+.colored-toast .swal2-close {
+  color: white;
+}
+
+.colored-toast .swal2-html-container {
+  color: white;
+}
+
+.swal2-title{
+  font-size: medium !important;
+}
+
+.swal2-styled.swal2-confirm, .swal2-styled.swal2-deny, .swal2-styled.swal2-cancel{
+  font-size: small !important;
+}
+/* Swal Alerts Ends */

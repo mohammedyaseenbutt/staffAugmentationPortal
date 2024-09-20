@@ -1,0 +1,17 @@
+.grey-custom-font span{
+    color: #F37440; 
+}
+.grey-custom-font span::after{
+    content: '|';
+    animation-name: blinking; 
+    animation-duration: .71s; 
+    animation-iteration-count: infinite;
+}
+@keyframes blinking{
+    from{
+        color: transparent; 
+    }
+    to{
+        color: lightgrey; 
+    }
+}

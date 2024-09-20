@@ -1,0 +1,95 @@
+<section class="container-fluid nav-padding overflow-hidden">
+  <div class="row signup-screen">
+    <!-- Left Side Content -->
+    <div class="col-4 signup-text">
+      <div class="custom-div-padding">
+        <h3>Get Your FREE</h3>
+        <h3>30-Days Trial Now!</h3>
+
+        <p class="mt-4 grey-custom-font">Experience why over 2 million customers choose Rhombus tools</p>
+        <div class="d-flex flex-row mt-4">
+          <div class="w-auto me-2">
+            <i class="bi bi-currency-dollar"></i>
+          </div>
+          <div class="w-auto">
+            Absolutely Free
+          </div>
+        </div>
+        <p class="grey-custom-font ms-4">No hidden charges, No credit card required</p>
+
+        <div class="d-flex flex-row mt-2">
+          <div class="w-auto me-2">
+            <i class="bi bi-lightning-fill"></i>
+          </div>
+          <div class="w-auto">
+            Fast & Easy
+          </div>
+        </div>
+        <p class="grey-custom-font ms-4">Get access instantly, no downloads required</p>
+
+        <div class="d-flex flex-row">
+          <div class="w-auto me-2">
+            <i class="bi bi-person-badge"></i>
+          </div>
+          <div class="w-auto">
+            Your Own Data
+          </div>
+        </div>
+        <p class="grey-custom-font ms-4">Enjoy the Free Trial with your company data</p>
+
+        <div class="d-flex flex-row">
+          <div class="w-auto me-2">
+            <i class="bi bi-database-fill-up"></i>
+          </div>
+          <div class="w-auto">
+            Unlimited Data
+          </div>
+        </div>
+        <p class="grey-custom-font ms-4">Access all features of the worlds #1 business software!</p>
+
+        <p class="mt-4 mb-0 pb-0">Do you prefer talking to a representative?</p>
+        <p>Call us at <span class="call-text">+1 610-450-4848</span></p>
+      </div>
+    </div>
+    <!-- Left Side Content Ends -->
+
+    <!-- Sign In -->
+    <div class="col-6">
+      <div class="custom-div-padding">
+        <h4>Sign In</h4>
+        <form>
+          <div class="row mt-4">
+            <div class="col">
+              <input type="email" class="form-control signup-form-control" placeholder="Email">
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col">
+              <div class="input-group">
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control signup-form-control-password"
+                  placeholder="Password">
+                <button class="input-group-text password-button" (click)="togglePasswordVisibility($event)">
+                  <i class="bi bi-eye-fill" *ngIf="showPassword"></i>
+                  <i class="bi bi-eye-slash-fill" *ngIf="!showPassword"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4 pe-0">
+            <div class="col pe-0">
+              <button class="btn btn-primary trial-button" routerLink="/home/dashboard">Sign In</button>
+            </div>
+          </div>
+
+          <hr class="mt-4">
+
+          <p class="grey-custom-font mt-4">Don't have any account? <span class="call-text"><a routerLink="/signup" class="call-text">Sign Up</a></span></p>
+
+        </form>
+      </div>
+    </div>
+    <!-- Sign In Ends -->
+  </div>
+</section>

@@ -1,0 +1,1007 @@
+<section class="container-fluid nav-padding heading-section">
+  <!-- Top Menu Section Starts -->
+  <div class="d-flex flex-row pt-5 pb-7">
+    <div class="w-100">
+      <br>
+    </div>
+  </div>
+  <!-- Top Menu Section Ends -->
+</section>
+
+<section class="container-fluid nav-padding mt-custom">
+  <div class="card shadow-lg float-card">
+    <div class="card-body dashboard-card-overflow">
+      <div class="row ps-3 pe-3 pt-2">
+        <div class="col-3 col-background">
+          <button type="button" class="btn btn-primary btn-width" data-bs-toggle="modal"
+            data-bs-target="#addNewServiceModal">
+            <i class="bi bi-plus-circle"></i>
+            Add New Service
+          </button>
+
+          <div class="row scrollable-row">
+            <div class="col">
+              <ng-template #loading>
+                <div class="d-flex text-center justify-content-center">
+                  <div class="circularLoaderList" *ngIf="listAllServices ? 'done' : 'load'"></div>
+                </div>
+              </ng-template>
+    
+              <div class="scrollable-col pb-3 float-card" *ngIf="listAllServices else loading">
+                <div class="card mt-3 service-plan-card" *ngFor="let service of listAllServices"
+                  [ngClass]="{'service-plan-card-active shadow': this.clickedServicePK === service.PK}">
+                  <div class="card-body" (click)="getService(service)">
+                    <div class="row">
+                      <div class="col">
+                        <p class="mb-0 service-text">Service Plan</p>
+                        <p class="mb-0 service-description-text">{{service.ServiceData.planName}}</p>
+                      </div>
+                      <div class="col">
+                        <p class="mb-0 service-text">Service Status</p>
+                        <p class="mb-0 service-status-text">{{service.ServiceData.planStatus}}</p>
+                      </div>
+                    </div>
+                    <hr class="checque-payment-hr mt-1 mb-1">
+                    <div class="row">
+                      <div class="col">
+                        <p class="mb-0 service-text">Start Date</p>
+                        <p class="mb-0 service-description-text">{{service.ServiceData.startDate | date}}</p>
+                      </div>
+                      <div class="col">
+                        <p class="mb-0 service-text">Total Cost</p>
+                        <p class="mb-0 service-description-text">{{service.ServiceData.planAmount | currency}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mt-3" *ngIf="listAllServices.length === 0">
+                  <div class="card-body">
+                    <h6 class="service-text">No added services found!</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #load>
+          <div class="col-9 d-flex align-items-center justify-content-center">
+            <p class="service-text">Please Click a Service to view details</p>
+          </div>
+        </ng-template>
+
+        <div class="col-9 float-card" *ngIf="listUserClickService else load">
+          <!-- Packages Table -->
+          <div class="d-flex header-display-info mb-2 justify-content-center align-items-center">
+            <div class="col ps-2 col-border-right text-overflow-ellipsis">
+              <p class="service-text-header display-inline-text">Service Plan: </p>
+              <p class="service-text-p display-inline-text">{{listUserClickService.ServiceData.planName}}</p>
+            </div>
+
+            <div class="col col-border-right text-center">
+              <p class="service-text-header display-inline-text">Start Date: </p>
+              <p class="service-text-p display-inline-text">{{listUserClickService.ServiceData.startDate | date}}</p>
+            </div>
+
+            <div class="col col-border-right text-center">
+              <p class="service-text-header display-inline-text">Months: </p>
+              <p class="service-text-p display-inline-text" *ngIf="!editable">
+                {{listUserClickService.ServiceData.planDuration}}</p>
+              <select class="form-select form-width form-width-input pt-0 pb-0 ps-2" *ngIf="editable" (change)="updateMonths($event)" [(ngModel)]="listUserClickService.ServiceData.planDuration">
+                <option value="1">1 Month</option>
+                <option value="2">2 Months</option>
+                <option value="3">3 Months</option>
+                <option value="4">4 Months</option>
+                <option value="5">5 Months</option>
+                <option value="6">6 Months</option>
+                <option value="7">7 Months</option>
+                <option value="8">8 Months</option>
+                <option value="9">9 Months</option>
+                <option value="10">10 Months</option>
+                <option value="11">11 Months</option>
+                <option value="12">12 Months</option>
+              </select>
+            </div>
+
+            <div class="col ps-2 text-center">
+              <p class="service-text-header display-inline-text">Amount: </p>
+              <p class="service-text-p display-inline-text">{{listUserClickService.ServiceData.planAmount | currency}}
+              </p>
+            </div>
+
+            <div class="col text-end">
+              <button class="btn edit-button btn-sm" (click)="editUserService(listUserClickService)" *ngIf="!editable">
+                <i class="bi bi-pencil"></i>
+                <p class="action-text">Edit</p>
+              </button>
+
+              <button class="btn save-button btn-sm" (click)="saveUserService(listUserClickService)" *ngIf="editable">
+                <i class="bi bi-check-lg"></i>
+                <p class="action-text">Save</p>
+              </button>
+
+              <button class="btn delete-button btn-sm ms-1" (click)="deleteUserService(listUserClickService)">
+                <i class="bi bi-trash3-fill"></i>
+                <p class="delete-text">Delete</p>
+              </button>
+
+              <button class="btn view-button btn-sm ms-1" (click)="viewUserService(listUserClickService)">
+                <i class="bi bi-eye"></i>
+                <p class="view-text">View</p>
+              </button>
+            </div>
+          </div>
+
+          <!-- Packages Table Ends -->
+
+          <div class="custom-border-radius mb-3 p-1 float-card" *ngIf="viewUserServiceData && showUserClickedService">
+            <ul class="nav nav-tabs" id="myServices" role="tablist" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Basic'">
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Basic-Moving.gif" alt="Animated GIF" class="nav-link nav-link-custom active gif-width" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Technical-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="technical-tab">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Discovery-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="discovery-tab" >
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Contractual-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="contractual-tab">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Payment-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="payment-tab">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/On-Boarding-Disabled.png" alt="Animated GIF" class="gif-width nav-link" id="onBoarding-tab">
+              </li>
+            </ul>
+
+            <ul class="nav nav-tabs" id="myServices" role="tablist" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Technical Meetup'">
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Basic-Static.png" alt="Animated GIF" class="nav-link nav-link-custom active gif-width" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Technical-Moving.gif" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="technical-tab" data-bs-toggle="tab" data-bs-target="#technical" type="button" role="tab" aria-controls="technical" aria-selected="true">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Discovery-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="discovery-tab" >
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Contractual-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="contractual-tab">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Payment-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="payment-tab">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/On-Boarding-Disabled.png" alt="Animated GIF" class="gif-width nav-link" id="onBoarding-tab">
+              </li>
+            </ul>
+
+            <ul class="nav nav-tabs" id="myServices" role="tablist" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Discovery'">
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Basic-Static.png" alt="Animated GIF" class="nav-link nav-link-custom active gif-width" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Technical-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="technical-tab" data-bs-toggle="tab" data-bs-target="#technical" type="button" role="tab" aria-controls="technical" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Discovery-Moving.gif" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="discovery-tab" data-bs-toggle="tab" data-bs-target="#discovery" type="button" role="tab" aria-controls="discovery" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Contractual-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="contractual-tab">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Payment-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="payment-tab">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/On-Boarding-Disabled.png" alt="Animated GIF" class="gif-width nav-link" id="onBoarding-tab">
+              </li>
+            </ul>
+
+            <ul class="nav nav-tabs" id="myServices" role="tablist" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Contractual'">
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Basic-Static.png" alt="Animated GIF" class="nav-link nav-link-custom active gif-width" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Technical-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="technical-tab" data-bs-toggle="tab" data-bs-target="#technical" type="button" role="tab" aria-controls="technical" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Discovery-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="discovery-tab" data-bs-toggle="tab" data-bs-target="#discovery" type="button" role="tab" aria-controls="discovery" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Contractual-Moving.gif" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="contractual-tab" data-bs-toggle="tab" data-bs-target="#contractual" type="button" role="tab" aria-controls="contractual" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Payment-Disabled.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="payment-tab">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/On-Boarding-Disabled.png" alt="Animated GIF" class="gif-width nav-link" id="onBoarding-tab">
+              </li>
+            </ul>
+
+            <ul class="nav nav-tabs" id="myServices" role="tablist" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Payment' || viewUserServiceData.ServiceData.planStatus === 'Payment Pending'">
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Basic-Static.png" alt="Animated GIF" class="nav-link nav-link-custom active gif-width" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Technical-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="technical-tab" data-bs-toggle="tab" data-bs-target="#technical" type="button" role="tab" aria-controls="technical" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Discovery-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="discovery-tab" data-bs-toggle="tab" data-bs-target="#discovery" type="button" role="tab" aria-controls="discovery" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Contractual-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="contractual-tab" data-bs-toggle="tab" data-bs-target="#contractual" type="button" role="tab" aria-controls="contractual" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Payment-Moving.gif" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/On-Boarding-Disabled.png" alt="Animated GIF" class="gif-width nav-link" id="onBoarding-tab">
+              </li>
+            </ul>
+
+            <ul class="nav nav-tabs" id="myServices" role="tablist" *ngIf="viewUserServiceData.ServiceData.planStatus === 'OnBoarded'">
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Basic-Static.png" alt="Animated GIF" class="nav-link nav-link-custom active gif-width" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Technical-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="technical-tab" data-bs-toggle="tab" data-bs-target="#technical" type="button" role="tab" aria-controls="technical" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Discovery-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="discovery-tab" data-bs-toggle="tab" data-bs-target="#discovery" type="button" role="tab" aria-controls="discovery" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Contractual-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="contractual-tab" data-bs-toggle="tab" data-bs-target="#contractual" type="button" role="tab" aria-controls="contractual" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/Payment-Static.png" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">
+              </li>
+              <li class="nav-item flex-fill" role="presentation">
+                <img src="../../assets/On-Boarding-Moving.gif" alt="Animated GIF" class="gif-width nav-link nav-link-custom" id="onBoarding-tab" data-bs-toggle="tab" data-bs-target="#onBoarding" type="button" role="tab" aria-controls="onBoarding" aria-selected="false">
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-content float-card" id="myServicesContent" *ngIf="viewUserServiceData && showUserClickedService">
+            <!-- Service Plan Details -->
+            <div class="tab-pane card-body text-center edit-card-body fade" [ngClass]="{'show active': viewUserServiceData.ServiceData.planStatus === 'Basic'}" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+              <h5>Service Plan</h5>
+              <p>{{viewUserServiceData.ServiceData.basic.planStatus}}</p>
+            </div>
+            <!-- Service Plan Details Ends -->
+
+            <!-- Minutes of Meeting -->
+            <div class="tab-pane card-body edit-card-body fade" [ngClass]="{'show active': viewUserServiceData.ServiceData.planStatus === 'Technical Meetup'}" id="technical" role="tabpanel" aria-labelledby="technical-tab">
+              <h5>Minutes of Meeting</h5>
+              <ul class="dash-list">
+                <li *ngFor="let meetingPoints of viewUserServiceData.ServiceData.technicalMeetup.minutesOfMeeting">{{meetingPoints}}</li>
+              </ul>
+            </div>
+            <!-- Minutes of Meeting Ends -->
+            
+            <!-- Discover Team -->
+            <div class="tab-pane card-body text-center edit-card-body fade" [ngClass]="{'show active': viewUserServiceData.ServiceData.planStatus === 'Discovery'}" id="discovery" role="tabpanel" aria-labelledby="discovery-tab">
+              <h5>Team Members</h5>
+              <div class="body genealogy-body genealogy-scroll">
+                <div class="genealogy-tree">
+                  <ul>
+                    <li *ngFor="let member of familyMembers">
+                      <a href="javascript:void(0);" (click)="toggleMember(member)">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <img [src]="member.imageUrl" alt="Member">
+                            <div class="member-details">
+                              <h3 class="member-name">{{ member.name }}</h3>
+                              <h6 class="member-title">{{ member.title }}</h6>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <ul *ngIf="member.expanded">
+                        <li *ngFor="let subMember of member.subMembers">
+                          <a href="javascript:void(0);" (click)="toggleMember(subMember)">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <img [src]="subMember.imageUrl" alt="Member">
+                                <div class="member-details">
+                                  <h3 class="member-name">{{ subMember.name }}</h3>
+                                  <h6 class="member-title">{{ subMember.title }}</h6>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                          <ul *ngIf="subMember.expanded && subMember.subMembers != undefined">
+                            <li *ngFor="let subsubMember of subMember.subMembers">
+                              <a href="javascript:void(0);" (click)="toggleMember(subsubMember)">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <img [src]="subsubMember.imageUrl" alt="Member">
+                                    <div class="member-details">
+                                      <h3 class="member-name">{{ subsubMember.name }}</h3>
+                                      <h6 class="member-title">{{ subsubMember.title }}</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Discover Team Ends -->
+
+            <!-- NDA Form Starts -->
+            <div class="tab-pane card-body edit-card-body fade" [ngClass]="{'show active': viewUserServiceData.ServiceData.planStatus === 'Contractual'}" id="contractual" role="tabpanel" aria-labelledby="contractual-tab">
+              <h5>NDA Form</h5>
+              <div id="editor-holder" class="editor p-3" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Contractual'">
+                <!-- <div [innerHTML]="viewUserServiceData.ServiceData.contractual.fileNDA"></div> -->
+              </div>
+              <button class="btn btn-primary btn-download mt-3" (click)="downloadNDA(viewUserServiceData)">
+                <i class="bi bi-download"></i>
+                Download
+              </button>
+              <!-- <ngx-dropzone (change)="onSelect($event)" class="ngx-dropzone-bg mt-3" id="signed-nda-file" *ngIf="viewUserServiceData.ServiceData.planStatus != 'Payment'">
+                <ngx-dropzone-label>
+                  <div class="row">
+                    <div class="col">
+                      Drag your NDA Document <br> here to start uploading.
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <hr class="checque-payment-hr">
+                    </div>
+                    <div class="col d-flex justify-content-center align-items-center">
+                      <p class="mb-0 pb-0">OR</p>
+                    </div>
+                    <div class="col">
+                      <hr class="checque-payment-hr">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button class="btn browser-btn">Browser Files</button>
+                    </div>
+                  </div>
+                </ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone> -->
+              <button class="btn btn-primary btn-download mt-3 ms-3" data-bs-toggle="modal" data-bs-target="#signNDAModal" *ngIf="viewUserServiceData.ServiceData.planStatus != 'Payment'">
+                <i class="bi bi-upload"></i>
+                Sign NDA
+              </button>
+              <!-- <button class="btn btn-primary btn-download mt-3" (click)="uploadNDA(viewUserServiceData)" id="signed-nda-button" *ngIf="viewUserServiceData.ServiceData.planStatus != 'Payment'">
+                <i class="bi bi-upload"></i>
+                Upload Signed NDA
+              </button> -->
+            </div>
+            <!-- NDA Form Ends -->
+
+            <!-- Payment Method -->
+            <div class="tab-pane card-body edit-card-body fade" [ngClass]="{'show active': viewUserServiceData.ServiceData.planStatus === 'Payment' || viewUserServiceData.ServiceData.planStatus === 'Payment Pending'}" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+              <h5 *ngIf="viewUserServiceData.ServiceData.planStatus === 'Payment'">Select a payment method</h5>
+              <p class="custom-font-color" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Payment'">Choose the payment method that best suits you.</p>
+
+              <h5 *ngIf="viewUserServiceData.ServiceData.planStatus === 'Payment Pending'">Payment Done</h5>
+              <p class="custom-font-color" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Payment Pending'">Waiting for Approval from Admin Side.</p>
+
+              <h5 *ngIf="viewUserServiceData.ServiceData.planStatus === 'OnBoarded'">Payment Done</h5>
+              <p class="custom-font-color" *ngIf="viewUserServiceData.ServiceData.planStatus === 'OnBoarded'">Payment has been verified from Admin Side.</p>
+              <div class="row" *ngIf="viewUserServiceData.ServiceData.planStatus === 'OnBoarded'">
+                <div class="col-3" *ngIf="viewUserServiceData.ServiceData.payment.chequePayment.chequeImageURL === 'PAID'">
+                  <div class="card payment-card" (click)="downloadCheqeueRecipts(viewUserServiceData)">
+                    <div class="card-body payment-card-body">
+                      <div class="d-flex flex-row">
+                        <div class="w-auto">
+                          <img src="../../assets/Cheque.png" class="icon-image">
+                        </div>
+                        <div class="w-75 d-flex align-items-center justify-content-center">
+                          <b>Paid via Cheque</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3" *ngIf="viewUserServiceData.ServiceData.payment.wireTransferPayment.wireTransferImageURL === 'PAID'">
+                  <div class="card payment-card" (click)="downloadWireTransferRecipts(viewUserServiceData)">
+                    <div class="card-body payment-card-body">
+                      <div class="d-flex flex-row">
+                        <div class="w-auto">
+                          <img src="../../assets/Wire-Transfer.png" class="icon-image">
+                        </div>
+                        <div class="w-75 d-flex align-items-center justify-content-center">
+                          <b>Paid via Wire Transfer</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h5 class="mt-3 mb-3" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Payment'">Payment options</h5>
+              <div class="row" *ngIf="viewUserServiceData.ServiceData.planStatus === 'Payment'">
+                <!-- <div class="col-3">
+                  <div class="card payment-card" data-bs-toggle="modal" data-bs-target="#creditCardPayment">
+                    <div class="card-body payment-card-body">
+                      <div class="d-flex flex-row">
+                        <div class="w-auto">
+                          <img src="../../assets/Credit-Card.png" class="icon-image">
+                        </div>
+                        <div class="w-75 d-flex align-items-center justify-content-center">
+                          <b>Credit Card</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="col-3">
+                  <div class="card payment-card" data-bs-toggle="modal" data-bs-target="#chequePayment">
+                    <div class="card-body payment-card-body">
+                      <div class="d-flex flex-row">
+                        <div class="w-auto">
+                          <img src="../../assets/Cheque.png" class="icon-image">
+                        </div>
+                        <div class="w-75 d-flex align-items-center justify-content-center">
+                          <b>Cheque</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="card payment-card" data-bs-toggle="modal" data-bs-target="#wireTransferPayment">
+                    <div class="card-body payment-card-body">
+                      <div class="d-flex flex-row">
+                        <div class="w-auto">
+                          <img src="../../assets/Wire-Transfer.png" class="icon-image">
+                        </div>
+                        <div class="w-75 d-flex align-items-center justify-content-center">
+                          <b>Wire Transfer</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Payment Method Ends -->
+
+            <!-- OnBoarded Starts -->
+            <div class="tab-pane card-body text-center edit-card-body fade" id="onBoarding" role="tabpanel" aria-labelledby="onBoarding-tab" [ngClass]="{'show active': viewUserServiceData.ServiceData.planStatus === 'OnBoarded'}">
+              <h5 *ngIf="!showEnd">On-Boarded</h5>
+              <p *ngIf="!showEnd">Congratulations, you've been On-Boarded till {{viewUserServiceData.ServiceData.endDate | date}}</p>
+
+              <h5 *ngIf="showEnd">On-Boarding Status</h5>
+              <div class="container">
+                <div id="countdown" *ngIf="!showEnd">
+                  <ul>
+                    <li class="time-li"><span id="days">3</span>days</li>
+                    <li class="time-li"><span id="hours">{{this.hours}}</span>Hours</li>
+                    <li class="time-li"><span id="minutes">{{this.minutes}}</span>Minutes</li>
+                    <li class="time-li"><span id="seconds">{{this.seconds}}</span>Seconds</li>
+                  </ul>
+                </div>
+                <div *ngIf="showEnd">
+                  <p class="mb-0 pb-0 date-text">Contract Ended on <b>{{this.viewUserServiceData.ServiceData.endDate | date}}</b></p>
+                </div>
+              </div>
+            </div>
+            <!-- OnBoarded Ends -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add a New Service Modal -->
+  <div class="modal fade" id="addNewServiceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="addNewServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header new-service-modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Select Plan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Basic Plan -->
+          <div class="d-flex flex-row base-package-row" [formGroup]="serviceForm">
+            <div class="w-35 d-flex p-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="planName" id="planName" formControlName="planName"
+                  value="Base">
+                <label class="form-check-label base-label">
+                  Base Team
+                </label>
+              </div>
+            </div>
+            <div class="w-auto d-flex p-2">
+              <p class="ps-4 pb-0 mb-0 basic-border-left">3 dedicated members</p>
+            </div>
+          </div>
+
+          <!-- Business Pro -->
+          <div class="d-flex flex-row business-package-row mt-3" [formGroup]="serviceForm">
+            <div class="w-35 d-flex p-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="planName" name="planName" formControlName="planName"
+                  value="Business">
+                <label class="form-check-label business-label" for="flexRadioDefault1">
+                  Business Pro
+                </label>
+              </div>
+            </div>
+            <div class="w-65 d-flex p-2">
+              <p class="ps-4 pb-0 mb-0 business-border-left">5 dedicated members</p>
+            </div>
+          </div>
+
+          <!-- Enterprise Plus -->
+          <div class="d-flex flex-row enterprise-package-row mt-3" [formGroup]="serviceForm">
+            <div class="w-35 d-flex p-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="planName" name="planName" formControlName="planName"
+                  value="Enterprise">
+                <label class="form-check-label enterprise-label">
+                  Enterprise Plus
+                </label>
+              </div>
+            </div>
+            <div class="w-65 d-flex p-2">
+              <p class="ps-4 pb-0 mb-0 enterprise-border-left">7 dedicated members</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer new-service-modal-footer">
+          <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success me-auto" *ngIf="serviceForm.controls['planName'].value === ''" (click)="selectPlanFirst()">Next</button>
+          <button type="button" class="btn btn-success me-auto" data-bs-dismiss="modal" data-bs-toggle="modal"
+            data-bs-target="#dateAndMonthModal" *ngIf="serviceForm.controls['planName'].value === 'Base'">Continue $3,750/Month</button>
+            <button type="button" class="btn btn-success me-auto" data-bs-dismiss="modal" data-bs-toggle="modal"
+            data-bs-target="#dateAndMonthModal" *ngIf="serviceForm.controls['planName'].value === 'Business'">Continue $8,400/Month</button>
+            <button type="button" class="btn btn-success me-auto" data-bs-dismiss="modal" data-bs-toggle="modal"
+            data-bs-target="#dateAndMonthModal" *ngIf="serviceForm.controls['planName'].value === 'Enterprise'">Continue $13,450/Month</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add a New Service Modal Ends -->
+
+  <!-- Desired Start Date and Months Modal -->
+  <div class="modal fade" id="dateAndMonthModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header new-service-modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Select Duration</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" [formGroup]="serviceForm">
+          <div class="row">
+            <div class="col">
+              <label class="form-label mb-1">Desired Start Date</label>
+              <input type="date" class="form-control payment-form-control-padding payment-form-control-border"
+                formControlName="startDate">
+            </div>
+            <div class="col">
+              <label class="form-label mb-1">Total Months</label>
+              <select class="form-select payment-form-control-padding payment-form-control-border"
+                formControlName="planDuration">
+                <option value="1">1 Month</option>
+                <option value="2">2 Months</option>
+                <option value="3">3 Months</option>
+                <option value="4">4 Months</option>
+                <option value="5">5 Months</option>
+                <option value="6">6 Months</option>
+                <option value="7">7 Months</option>
+                <option value="8">8 Months</option>
+                <option value="9">9 Months</option>
+                <option value="10">10 Months</option>
+                <option value="11">11 Months</option>
+                <option value="12">12 Months</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer new-service-modal-footer">
+          <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal" data-bs-toggle="modal"
+            data-bs-target="#addNewServiceModal">Back</button>
+          <button type="button" class="btn btn-success me-auto" (click)="createService()">Proceed</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Desired Start Date and Months Modal Ends -->
+
+  <!-- Credit Card Payment Modal -->
+  <div class="modal fade" id="creditCardPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="creditCardPaymentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content modal-content-radius">
+        <div class="modal-header credit-card-modal-header">
+          <h5 class="modal-title h5-heading" id="creditCardPaymentLabel">Credit Card Payment</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-2 d-flex align-items-center">
+              <p class="pb-0 mb-0 credit-card-text">Service Info</p>
+            </div>
+            <div class="col">
+              <hr class="credit-card-text">
+            </div>
+          </div>
+          <form [formGroup]="cardPaymentForm">
+            <div class="row mt-2">
+              <div class="col">
+                <label class="form-label mb-1">Service Plan</label>
+                <input type="text" class="form-control payment-form-control-padding" formControlName="ServicePlan" readonly>
+              </div>
+              <div class="col">
+                <label class="form-label mb-1">Total Amount</label>
+                <input type="text" class="form-control payment-form-control-padding" formControlName="AmountToPay" readonly>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-2 d-flex align-items-center">
+                <p class="pb-0 mb-0 credit-card-text">Credit Card Info</p>
+              </div>
+              <div class="col">
+                <hr class="credit-card-text">
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col">
+                <label class="form-label mb-1">Name on Card</label>
+                <input type="text" class="form-control payment-form-control-padding payment-form-control-border"
+                  placeholder="Enter Name" formControlName="NameOnCard">
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col">
+                <label class="form-label mb-1">Card Number</label>
+                <input type="text" class="form-control payment-form-control-padding payment-form-control-border"
+                  placeholder="Enter Number" formControlName="CardNumber">
+              </div>
+            </div>
+
+            <div class="row mt-3 mb-2">
+              <div class="col">
+                <label class="form-label mb-1">Expiry Month</label>
+                <select class="form-select payment-form-control-padding payment-form-control-border" formControlName="ExpiryMonth">
+                  <option value="01">January</option>
+                  <option value="02">Feburary</option>
+                  <option value="03">March</option>
+                  <option value="04">April</option>
+                  <option value="05">May</option>
+                  <option value="06">June</option>
+                  <option value="07">July</option>
+                  <option value="08">August</option>
+                  <option value="09">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">Devember</option>
+                </select>
+              </div>
+
+              <div class="col">
+                <label class="form-label mb-1">Expiry Year</label>
+                <select class="form-select payment-form-control-padding payment-form-control-border" formControlName="ExpiryMonth">
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                </select>
+              </div>
+
+              <div class="col">
+                <label class="form-label mb-1">CVV</label>
+                <input type="text" class="form-control payment-form-control-padding payment-form-control-border"
+                  placeholder="Enter CVV" formControlName="CVV">
+              </div>
+            </div>
+
+            <input class="form-check-input payment-form-check-input me-2" type="checkbox" formControlName="AutoPayment">
+            <label class="form-check-label">
+              Auto Payment to continue this service.
+            </label>
+          </form>
+        </div>
+        <div class="modal-footer new-service-modal-footer">
+          <button type="button" class="btn btn-secondary btn-clear-form" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary btn-submit-form me-auto">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Credit Card Payment Modal Ends -->
+
+  <!-- Cheque Payment Modal -->
+  <div class="modal fade" id="chequePayment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="chequePaymentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-radius">
+        <div class="modal-header credit-card-modal-header">
+          <h5 class="modal-title h5-heading" id="chequePaymentLabel">Cheque Payment</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div class="div ps-3 pe-3 pt-3">
+            <h6 class="checque-modal-h6">Your check is made for:</h6>
+            <p class="checque-modal-p mb-0">Stampa Solutions LLC</p>
+          </div>
+
+          <hr class="checque-payment-hr">
+
+          <div class="div ps-3 pe-3">
+            <h6 class="checque-modal-h6">Bank</h6>
+            <p class="checque-modal-p mb-0">Wells Fargo</p>
+          </div>
+
+          <hr class="checque-payment-hr">
+
+          <div class="div ps-3 pe-3">
+            <h6 class="checque-modal-h6">Account Number</h6>
+            <p class="checque-modal-p mb-0">12345448521</p>
+          </div>
+
+          <hr class="checque-payment-hr">
+
+          <div class="div ps-3 pe-3" *ngIf="this.viewUserServiceData?.ServiceData?.planAmount !== null && this.viewUserServiceData?.ServiceData?.planAmount !== undefined">
+            <h6 class="checque-modal-h6">Total Amount</h6>
+            <p class="checque-modal-p mb-0">{{ this.viewUserServiceData.ServiceData.planAmount | currency : 'USD' }}
+            </p>
+          </div>
+        </div>
+
+        <hr class="checque-payment-hr">
+
+        <div class="ps-3 pe-3">
+          <h6 class="checque-modal-h6">Upload Cheque Image</h6>
+          <ngx-dropzone (change)="onSelectChequeModal($event)">
+            <ngx-dropzone-label>
+              <div class="row">
+                <div class="col">
+                  Drag your document & photos <br> here to start uploading.
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <hr class="checque-payment-hr">
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                  <p class="mb-0 pb-0">OR</p>
+                </div>
+                <div class="col">
+                  <hr class="checque-payment-hr">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <button class="btn browser-btn">Browser Files</button>
+                </div>
+              </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of chequePaymentFiles" [removable]="true" (removed)="onRemoveChequeModal(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+
+        <div class="modal-footer new-service-modal-footer d-flex justify-content-center mt-3">
+          <button type="button" class="btn btn-secondary btn-clear-form" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary btn-submit-form" (click)="uploadChequeImages()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Cheque Payment Modal Ends -->
+
+  <!-- Wire Transfer Payment Modal -->
+  <div class="modal fade" id="wireTransferPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="wireTransferPaymentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-radius">
+        <div class="modal-header credit-card-modal-header">
+          <h5 class="modal-title h5-heading" id="wireTransferPaymentLabel">Wire Transfer Payment</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div class="div ps-3 pe-3 pt-3">
+            <h6 class="checque-modal-h6">Your Wire Transfer is made for:</h6>
+            <p class="checque-modal-p mb-0">Stampa Solutions LLC</p>
+          </div>
+
+          <hr class="checque-payment-hr">
+
+          <div class="div ps-3 pe-3">
+            <h6 class="checque-modal-h6">Bank</h6>
+            <p class="checque-modal-p mb-0">Wells Fargo</p>
+          </div>
+
+          <hr class="checque-payment-hr">
+
+          <div class="div ps-3 pe-3">
+            <h6 class="checque-modal-h6">Account Number</h6>
+            <p class="checque-modal-p mb-0">12345448521</p>
+          </div>
+
+          <hr class="checque-payment-hr">
+
+          <div class="div ps-3 pe-3" *ngIf="this.viewUserServiceData?.ServiceData?.planAmount !== null && this.viewUserServiceData?.ServiceData?.planAmount !== undefined">
+            <h6 class="checque-modal-h6">Total Amount</h6>
+            <p class="checque-modal-p mb-0">{{ this.viewUserServiceData.ServiceData.planAmount | currency : 'USD' }}
+            </p>
+          </div>
+        </div>
+
+        <hr class="checque-payment-hr">
+
+        <div class="div ps-3 pe-3">
+          <h6 class="checque-modal-h6">Upload Recipt</h6>
+          <ngx-dropzone (change)="onSelectWireTransferModal($event)">
+            <ngx-dropzone-label>
+              <div class="row">
+                <div class="col">
+                  Drag your document & photos <br> here to start uploading.
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <hr class="checque-payment-hr">
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                  <p class="mb-0 pb-0">OR</p>
+                </div>
+                <div class="col">
+                  <hr class="checque-payment-hr">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <button class="btn browser-btn">Browser Files</button>
+                </div>
+              </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of wireTransferPaymentFiles" [removable]="true" (removed)="onRemoveWireTransferModal(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+
+        <div class="modal-footer new-service-modal-footer d-flex justify-content-center mt-3">
+          <button type="button" class="btn btn-secondary btn-clear-form" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary btn-submit-form" (click)="uploadWireTransferImages()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Wire Transfer Modal Ends -->
+
+  <!-- Sign NDA Modal -->
+  <div class="modal fade" id="signNDAModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header new-service-modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Sign NDA</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" [formGroup]="customerFormData">
+          <div class="row">
+            <div class="col">
+              <label class="form-label mb-1">Name</label>
+              <input type="text" class="form-control payment-form-control-padding payment-form-control-border"
+                formControlName="name">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <label class="form-label mb-1">Job Title</label>
+              <input type="text" class="form-control payment-form-control-padding payment-form-control-border"
+                formControlName="jobTitle">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer new-service-modal-footer">
+          <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal" data-bs-toggle="modal">Back</button>
+          <button type="button" class="btn btn-success me-auto" (click)="signNDA()">Proceed</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Sign NDA Modal Ends -->
+
+  <!-- Complete Profile Setup Modal -->
+  <button id="launchModal" data-bs-toggle="modal" data-bs-target="#completeSetupProfile">Profile Setup</button>
+  <div class="modal fade" id="completeSetupProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-radius">
+        <div class="modal-body p-0">
+          <div class="card">
+            <div class="card-header card-header-profile"></div>
+            <div class="card-body" [formGroup]="customerFormData">
+              <div class="container container-profile">
+                <div class="avatar-upload">
+                  <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" (change)="onFileSelected($event)" />
+                    <label for="imageUpload"></label>
+                  </div>
+                  <div class="avatar-preview">
+                    <div id="imagePreview" style="background-image: url('../../assets/solid-color-image.jpeg');">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="inner mt-3">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" placeholder="Full Name" formControlName="name">
+                      <label class="label-custom">Name</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" placeholder="Company Name" formControlName="companyName">
+                      <label class="label-custom">Company Name</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" placeholder="Job Title" formControlName="jobTitle">
+                      <label class="label-custom">Job Title</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="form-floating">
+                      <select class="form-select" formControlName="noEmployees">
+                        <option value="1-10">1-10</option>
+                        <option value="11-50">11-50</option>
+                        <option value="50+">50+</option>
+                      </select>
+                      <label>Number of Employees</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" placeholder="Country" formControlName="country">
+                      <label class="label-custom">Country</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="form-floating">
+                      <textarea class="form-control h-50" placeholder="What you do" rows="3"
+                        formControlName="companyDetails"></textarea>
+                      <label>Company Details</label>
+                    </div>
+                  </div>
+                </div>
+                <p class="grey-custom-font mt-4">Please fill this form to continue using our dashboard!</p>
+                <button type="button" class="btn btn-primary btn-submit-form me-2"
+                  (click)="submitCustomerData()">Update</button>
+                <button type="button" class="btn btn-secondary btn-clear-form" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Complete Profile Setup Modal Ends -->
+</section>

@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid nav-padding">
+    <a class="navbar-brand custom-margin" href="">
+      <img src="../../assets/Stampa-High-Res-Logo-White.png" class="logo-size">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav w-100 mb-2 mb-lg-0 float-right">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Monthly Plan</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About Us</a>
+        </li>
+        <li class="d-flex justify-content-center ms-5 float-right">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control top-nav-search" placeholder="Search anything...">
+          </div>
+        </li>
+      </ul>
+      <div class="dropdown">
+        <button class="btn btn-secondary notification-bell grow" type="button" id="notificationDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-bell"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="notificationDropDown">
+          <li><a class="dropdown-item active" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary user-icon-btn rounded-circle grow" type="button" id="userDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="../../assets/dummy-user.png" class="rounded-circle loggedin-user" alt="..." id="ProfilePictue">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="userDropDown">
+
+          <li>
+            <a class="dropdown-item" (click)="updateProfileModal()">
+              <i class="bi bi-person me-2"></i>Update Profile
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="logOutUser()">
+              <i class="bi bi-arrow-left me-2"></i>Log Out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
